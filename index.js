@@ -2,6 +2,11 @@ var express = require('express')
 var app = express()
 var google = require('googleapis')
 // AIzaSyBq55vjYfWrkXii5Tqngi-pzlUIagNd0ck
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  next()
+})
 var ReadSheet = (keyAPI, sheetId, sheet, callback) => {
   var sheets = google.sheets('v4')
   sheets.spreadsheets.values.get({
